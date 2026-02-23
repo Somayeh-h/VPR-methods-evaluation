@@ -49,7 +49,7 @@ def read_images_paths(dataset_folder):
 
 
 class TestDataset(data.Dataset):
-    def __init__(self, database_folder, queries_folder, positive_dist_threshold=25, image_size=None, use_labels=True):
+    def __init__(self, database_folder, queries_folder, positive_dist_threshold=25, image_size=None, use_labels=True, num_images=0, sampling_rate=0):
         """Dataset with images from database and queries, used for validation and test.
         Parameters
         ----------
@@ -64,6 +64,10 @@ class TestDataset(data.Dataset):
 
         self.database_paths = read_images_paths(database_folder)
         self.queries_paths = read_images_paths(queries_folder)
+        
+        if num_images != 0:
+            self.database_paths = self.database_paths[:num_images:sampling_rate]
+            self.queries_paths = self.queries_paths[:num_images:sampling_rate]
 
         self.images_paths = list(self.database_paths) + list(self.queries_paths)
 

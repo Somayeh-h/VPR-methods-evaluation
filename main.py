@@ -20,7 +20,7 @@ def main(args):
     start_time = datetime.now()
 
     logger.remove()  # Remove possibly previously existing loggers
-    log_dir = Path("logs") / args.log_dir / start_time.strftime("%Y-%m-%d_%H-%M-%S")
+    log_dir = Path("logs") / args.log_dir / f"{args.method}_{args.database_folder.split('/')[-2]}_{args.database_folder.split('/')[-1]}_{args.queries_folder.split('/')[-1]}"
     logger.add(sys.stdout, colorize=True, format="<green>{time:%Y-%m-%d %H:%M:%S}</green> {message}", level="INFO")
     logger.add(log_dir / "info.log", format="<green>{time:%Y-%m-%d %H:%M:%S}</green> {message}", level="INFO")
     logger.add(log_dir / "debug.log", level="DEBUG")
@@ -40,6 +40,8 @@ def main(args):
         positive_dist_threshold=args.positive_dist_threshold,
         image_size=args.image_size,
         use_labels=args.use_labels,
+        num_images=args.num_images,
+        sampling_rate=args.sampling_rate, 
     )
     logger.info(f"Testing on {test_ds}")
 
