@@ -94,6 +94,12 @@ def parse_arguments():
         action="store_true",
         help="set to True if you want to save the descriptors extracted by the model",
     )
+    
+    parser.add_argument("--num_images", type=int, required=False, default=0,
+                        help="number of images to use for reference and query")
+    parser.add_argument("--sampling_rate", type=int, required=False, default=1,
+                        help="sampling rate for reference and query images")
+    
     args = parser.parse_args()
 
     args.use_labels = not args.no_labels
