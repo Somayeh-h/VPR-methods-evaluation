@@ -18,9 +18,13 @@ from test_dataset import TestDataset
 
 def main(args):
     start_time = datetime.now()
+    parts = Path(args.database_folder).parts
+    dataset_name = parts[parts.index("datasets") + 1]
+    ref_name = parts[-1]
+    qry_name = Path(args.queries_folder).parts[-1]
 
     logger.remove()  # Remove possibly previously existing loggers
-    log_dir = Path("logs") / args.log_dir / f"{args.method}_{args.database_folder.split('/')[-2]}_{args.database_folder.split('/')[-1]}_{args.queries_folder.split('/')[-1]}"
+    log_dir = Path("logs") / args.log_dir / f"{args.method}_{dataset_name}_{ref_name}_{qry_name}"
     logger.add(sys.stdout, colorize=True, format="<green>{time:%Y-%m-%d %H:%M:%S}</green> {message}", level="INFO")
     logger.add(log_dir / "info.log", format="<green>{time:%Y-%m-%d %H:%M:%S}</green> {message}", level="INFO")
     logger.add(log_dir / "debug.log", level="DEBUG")

@@ -27,10 +27,11 @@ def read_images_paths(dataset_folder):
     if not os.path.exists(dataset_folder):
         raise FileNotFoundError(f"Folder {dataset_folder} does not exist")
 
-    parts = Path(dataset_folder).parts
-    datasets_foldername = parts[parts.index("datasets")]
-    dataset_name = parts[parts.index("datasets") + 1]
-    file_with_paths = os.path.join("./..", datasets_foldername, "dataset_imageNames", f"{dataset_name}_imageNames.txt")
+    # parts = Path(dataset_folder).parts
+    # datasets_foldername = parts[parts.index("datasets")]
+    # dataset_name = parts[parts.index("datasets") + 1]
+    # file_with_paths = os.path.join("./..", datasets_foldername, "dataset_imageNames", f"{dataset_name}_imageNames.txt")
+    file_with_paths = dataset_folder + "_images_paths.txt"
 
     if os.path.exists(file_with_paths):
         print(f"Reading paths of images within {dataset_folder} from {file_with_paths}")
